@@ -22,26 +22,26 @@
   --p3:#1565C0;       /* Medical blue */
   --p4:#2196F3;       /* Bright blue */
   --p5:#64B5F6;       /* Soft blue */
- 
+  
   /* Healing Teal */
   --t1:#004D40;
   --t2:#00695C;
   --t3:#009688;
   --t4:#26A69A;
   --t5:#80CBC4;
- 
+  
   /* Premium Gold */
   --g1:#8B6914;
   --g2:#B8860B;
   --g3:#D4AF37;
   --g4:#F0C419;
   --g5:#FFD700;
- 
+  
   /* Levels */
   --r1c:#1565C0;      /* R1 — Royal Blue */
   --r2c:#6A1B9A;      /* R2 — Royal Purple */
   --r3c:#00838F;      /* R3 — Deep Teal */
- 
+  
   /* Surfaces */
   --bg:#F5F7FA;
   --bg2:#EBF1F7;
@@ -49,14 +49,14 @@
   --card2:#FAFCFE;
   --border:#E3E8F0;
   --border2:#D5DDE9;
- 
+  
   /* Text */
   --tx1:#0A1929;
   --tx2:#1E293B;
   --tx3:#475569;
   --tx4:#94A3B8;
   --tx5:#CBD5E1;
- 
+  
   /* Status */
   --success:#2E7D32;
   --success-bg:#E8F5E9;
@@ -66,7 +66,7 @@
   --danger-bg:#FFEBEE;
   --info:#0277BD;
   --info-bg:#E1F5FE;
- 
+  
   /* Shadows */
   --sh-sm:0 1px 3px rgba(10,37,64,0.06);
   --sh:0 4px 16px rgba(10,37,64,0.08);
@@ -74,7 +74,7 @@
   --sh-lg:0 16px 48px rgba(10,37,64,0.14);
   --sh-glow:0 0 24px rgba(33,150,243,0.15);
   --sh-gold:0 0 16px rgba(212,175,55,0.25);
- 
+  
   /* Gradients */
   --grad-primary:linear-gradient(135deg,#0E3A6F 0%,#1565C0 50%,#2196F3 100%);
   --grad-deep:linear-gradient(135deg,#0A2540 0%,#0E3A6F 100%);
@@ -1370,25 +1370,25 @@ function mockExamScore(id, examType) {
       'Part2': ['Part 2', 'PART 2', 'Part2', 'SCFHS Part 2']
     };
     const possibleNames = typeMap[examType] || [examType];
-   
+    
     // Find matching exam record
     const match = EXAMS_DATA.find(e => {
       const eName = (e['اسم الطبيب'] || e['Name'] || '').trim().toUpperCase();
       const eType = (e['نوع الاختبار'] || e['Type'] || '').trim();
-      return eName === trainee.name.toUpperCase() &&
+      return eName === trainee.name.toUpperCase() && 
              possibleNames.some(t => eType.toUpperCase() === t.toUpperCase());
     });
-   
+    
     if(match){
       const scoreStr = match['الدرجة (من 100)'] || match['الدرجة'] || match['Score'] || '';
       const score = parseFloat(scoreStr);
       if(!isNaN(score)) return Math.round(score);
     }
-   
+    
     // If we have exam data but no match for this trainee — return null (not yet)
     if(EXAMS_DATA.length > 5) return null;
   }
- 
+  
   // Fallback to mock data
   const seed = (n) => Math.abs(Math.sin(n * id * 17 + examType.length * 7)) * 100;
   return Math.round(seed(1) * 0.4 + 50);
@@ -1463,8 +1463,8 @@ function pageContent(){
 }
 
 function heroHeader(title,arTitle,subtitle,extras){
-  const updateInfo = S.lastUpdate ?
-    `Updated ${formatTimeAgo(S.lastUpdate)}` :
+  const updateInfo = S.lastUpdate ? 
+    `Updated ${formatTimeAgo(S.lastUpdate)}` : 
     (S.loading ? 'Loading...' : 'Static');
   return `
     <div class="hero">
@@ -1504,7 +1504,7 @@ function renderDash(){
     'R2':'linear-gradient(135deg,#6A1B9A,#9C27B0)',
     'R3':'linear-gradient(135deg,#00838F,#00BCD4)'
   };
- 
+  
   const heroExtras=`
     <div class="hero-right">
       <div class="hero-stat">
@@ -1520,7 +1520,7 @@ function renderDash(){
         <div class="hero-stat-l">Groups</div>
       </div>
     </div>`;
- 
+  
   return `
     ${heroHeader('Excellence in <span class="gold">Medical Training</span>','أكاديمية طب الأسرة بحائل','Quality Dashboard',heroExtras)}
     <div class="content">
@@ -1582,7 +1582,7 @@ function renderDash(){
           </div>
         </div>
       </div>
-     
+      
       <div class="r2">
         <div class="cd">
           <div class="cd-hdr">
@@ -1639,7 +1639,7 @@ function renderDash(){
           </div>
         </div>
       </div>
-     
+      
       <div class="cd">
         <div class="cd-hdr">
           <div>
@@ -1678,7 +1678,7 @@ function renderTrainees(){
     if(S.gpF&&r.group!==S.gpF)return false;
     return true;
   });
- 
+  
   const heroExtras=`
     <div class="hero-right">
       <div class="hero-stat">
@@ -1690,7 +1690,7 @@ function renderTrainees(){
         <div class="hero-stat-l">Total</div>
       </div>
     </div>`;
- 
+  
   return `
     ${heroHeader('Trainees <span class="gold">Database</span>','قاعدة بيانات المتدربين','Active Residents',heroExtras)}
     <div class="content">
@@ -1729,7 +1729,7 @@ function renderTrainersList(){
     if(S.trF==='t'&&x.r!=='Trainer')return false;
     return true;
   });
- 
+  
   const heroExtras=`
     <div class="hero-right">
       <div class="hero-stat">
@@ -1741,7 +1741,7 @@ function renderTrainersList(){
         <div class="hero-stat-l">Coords</div>
       </div>
     </div>`;
- 
+  
   return `
     ${heroHeader('Faculty <span class="gold">Directory</span>','دليل المدربين','Coordinators & Trainers',heroExtras)}
     <div class="content">
@@ -1783,7 +1783,7 @@ function renderMK(){
     if(!groups[r.group])groups[r.group]=[];
     groups[r.group].push(r);
   });
- 
+  
   const heroExtras=`
     <div class="hero-right">
       <div class="hero-stat">
@@ -1795,7 +1795,7 @@ function renderMK(){
         <div class="hero-stat-l">Groups</div>
       </div>
     </div>`;
- 
+  
   return `
     ${heroHeader('Master Key <span class="gold">Rotation</span>','جدول الدوران السنوي','Annual Hospital & PHC Schedule',heroExtras)}
     <div class="content">
@@ -1808,8 +1808,8 @@ function renderMK(){
           <tbody>
             ${Object.keys(groups).sort().map(g=>`<tr>
               <td>
-                <span class="bd ${lv==='R1'?'r1c':lv==='R2'?'r2c':'r3c'}">${lv}</span>
-                <strong style="font-size:13px">${g}</strong>
+                <span class="bd ${lv==='R1'?'r1c':lv==='R2'?'r2c':'r3c'}">${lv}</span> 
+                <strong style="font-size:13px">${g}</strong> 
                 <span style="font-size:10px;color:var(--tx4);font-weight:500">(${groups[g].length})</span>
               </td>
               ${MO.map((m,i)=>{
@@ -1845,13 +1845,13 @@ function renderMK(){
 
 function mockPerf(id){
   const trainee = RES.find(r => r.id === id);
- 
+  
   // Try to build real data from CBD/DOPS/MINICEX/ITER sheets
   if(trainee && (CBD_DATA.length > 0 || DOPS_DATA.length > 0 || MINICEX_DATA.length > 0 || ITER_DATA.length > 0)){
     const traineeName = trainee.name.toUpperCase();
     const months = ['OCTOBER','NOVEMBER','DECEMBER','JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER'];
     const monthShort = ['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
-   
+    
     function getEvalScore(data, monthName, name){
       const matches = data.filter(e => {
         const eName = (e['اسم الطبيب'] || e['Name'] || '').trim().toUpperCase();
@@ -1869,7 +1869,7 @@ function mockPerf(id){
       if(scores.length === 0) return null;
       return Math.round(scores.reduce((a,b)=>a+b,0) / scores.length);
     }
-   
+    
     const result = months.map((m, i) => {
       const cbd = getEvalScore(CBD_DATA, m, traineeName);
       const dops = getEvalScore(DOPS_DATA, m, traineeName);
@@ -1883,7 +1883,7 @@ function mockPerf(id){
         iter: iter
       };
     });
-   
+    
     // If we have any real data at all, use it (with nulls for missing)
     const hasRealData = result.some(r => r.cbd !== null || r.dops !== null || r.cex !== null || r.iter !== null);
     if(hasRealData){
@@ -1897,7 +1897,7 @@ function mockPerf(id){
       }));
     }
   }
- 
+  
   // Fallback to mock data
   const seed=n=>Math.abs(Math.sin(n*id*13))*100;
   return [
@@ -1914,7 +1914,7 @@ function renderPerf(){
   const r=RES.find(x=>x.id===parseInt(S.pRes));
   const d=mockPerf(S.pRes);
   const last=d[d.length-1];
- 
+  
   const heroExtras=`
     <div class="hero-right">
       <div class="hero-stat">
@@ -1926,7 +1926,7 @@ function renderPerf(){
         <div class="hero-stat-l">Exams</div>
       </div>
     </div>`;
- 
+  
   return `
     ${heroHeader('Performance <span class="gold">& Exams</span>','الأداء والاختبارات','Evaluations · Exams · Leaves',heroExtras)}
     <div class="content">
@@ -1999,9 +1999,9 @@ function renderPerf(){
         <div class="if">
           <span style="font-size:18px">ℹ️</span>
           <div>
-            <strong>Exam Reference:</strong>
-            <strong>WADA</strong> = Annual Academic Exam ·
-            <strong>OSCE</strong> = Objective Structured Clinical Exam ·
+            <strong>Exam Reference:</strong> 
+            <strong>WADA</strong> = Annual Academic Exam · 
+            <strong>OSCE</strong> = Objective Structured Clinical Exam · 
             <strong>Part 1/2</strong> = Saudi Board Exams
           </div>
         </div>
@@ -2018,7 +2018,7 @@ function renderPerf(){
         }, 0);
         const totalAllowed = 28;
         const remaining = totalAllowed - totalUsed;
-       
+        
         return `
         <div class="kg" style="grid-template-columns:repeat(3,1fr)">
           <div class="k k-trainees">
@@ -2130,4 +2130,302 @@ function renderExamsTable(){
           return `
             <tr>
               <td style="color:var(--tx4);font-size:11px;font-weight:600">${r.id}</td>
-              <td style="font-weight:600">${
+              <td style="font-weight:600">${r.name}</td>
+              <td><span class="bd ${r.level==='R1'?'r1c':r.level==='R2'?'r2c':'r3c'}">${r.level}</span></td>
+              <td><span class="bd gc">${r.group}</span></td>
+              <td style="text-align:center">${formatScore(scores[0])}</td>
+              <td style="text-align:center">${formatScore(scores[1])}</td>
+              <td style="text-align:center">${formatScore(scores[2])}</td>
+              <td style="text-align:center">${formatScore(scores[3])}</td>
+              <td style="text-align:center;font-weight:700">${avg !== null ? formatScore(avg) : '—'}</td>
+            </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+    <div style="text-align:center;font-size:11.5px;color:var(--tx3);margin-top:14px;padding:12px;background:var(--bg2);border-radius:8px;font-weight:500">
+      📊 Showing <strong>${filtered.length}</strong> of ${RES.length} · 
+      <span style="color:var(--success)">●</span> Pass (≥60%) · 
+      <span style="color:var(--danger)">●</span> Fail (&lt;60%) · 
+      <span style="color:var(--tx5)">—</span> Pending
+    </div>
+  `;
+}
+
+function renderExamComparisonChart(){
+  const levels = ['R1', 'R2', 'R3'];
+  const examTypes = ['WADA', 'OSCE', 'Part1', 'Part2'];
+  const examLabels = ['WADA', 'OSCE', 'Part 1', 'Part 2'];
+  const data = levels.map(lv => {
+    const lvResidents = RES.filter(r => r.level === lv);
+    const avgs = examTypes.map(et => {
+      const scores = lvResidents.map(r => mockExamScore(r.id, et)).filter(s => s !== null);
+      if(scores.length === 0) return 0;
+      return Math.round(scores.reduce((a,b)=>a+b,0) / scores.length);
+    });
+    return { level: lv, count: lvResidents.length, avgs: avgs };
+  });
+  const w = 700, h = 320, p = 50, cw = w - p*2, ch = h - p*2 - 20;
+  const groupCount = examLabels.length;
+  const barCount = levels.length;
+  const groupWidth = cw / groupCount;
+  const barWidth = (groupWidth * 0.7) / barCount;
+  const groupGap = groupWidth * 0.15;
+  const colors = {R1:'#1565C0', R2:'#6A1B9A', R3:'#00838F'};
+  const colors2 = {R1:'#42A5F5', R2:'#AB47BC', R3:'#26C6DA'};
+  let bars = '';
+  data.forEach((lvData, lvIdx) => {
+    lvData.avgs.forEach((score, examIdx) => {
+      const x = p + examIdx * groupWidth + groupGap + lvIdx * barWidth;
+      const barH = (score/100) * ch;
+      const y = p + ch - barH;
+      bars += `
+        <rect x="${x}" y="${y}" width="${barWidth - 2}" height="${barH}" 
+              fill="url(#bar${lvData.level})" rx="4" filter="url(#bds)"/>
+        <text x="${x + (barWidth-2)/2}" y="${y - 6}" text-anchor="middle" 
+              font-size="11" font-weight="700" fill="${colors[lvData.level]}" font-family="Lexend">${score}</text>
+      `;
+    });
+  });
+  return `
+    <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;max-height:400px">
+      <defs>
+        ${levels.map(l=>`
+          <linearGradient id="bar${l}" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="${colors2[l]}"/>
+            <stop offset="100%" stop-color="${colors[l]}"/>
+          </linearGradient>
+        `).join('')}
+        <filter id="bds"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.15"/></filter>
+      </defs>
+      ${[0,25,50,75,100].map(v => {
+        const y = p + ch - (v/100)*ch;
+        return `<line x1="${p}" y1="${y}" x2="${p+cw}" y2="${y}" stroke="#E3E8F0" stroke-dasharray="3,3"/>
+                <text x="${p-8}" y="${y+3}" text-anchor="end" font-size="10" fill="#94A3B8" font-family="Lexend">${v}</text>`;
+      }).join('')}
+      <line x1="${p}" y1="${p+ch-(60/100)*ch}" x2="${p+cw}" y2="${p+ch-(60/100)*ch}" 
+            stroke="#C62828" stroke-dasharray="6,3" stroke-width="1.5" opacity="0.6"/>
+      <text x="${p+cw+5}" y="${p+ch-(60/100)*ch+3}" font-size="9" font-weight="700" fill="#C62828">60%</text>
+      ${bars}
+      ${examLabels.map((lbl, i) => {
+        const x = p + i * groupWidth + groupWidth/2;
+        return `<text x="${x}" y="${h - 25}" text-anchor="middle" 
+                      font-size="13" font-weight="700" fill="#0A1929" font-family="Inter">${lbl}</text>`;
+      }).join('')}
+      <text x="15" y="${p+ch/2}" text-anchor="middle" font-size="10" font-weight="600" fill="#475569" 
+            transform="rotate(-90 15 ${p+ch/2})">Score (%)</text>
+    </svg>
+    <div style="display:flex;justify-content:center;gap:24px;margin-top:14px;font-size:13px;flex-wrap:wrap">
+      ${data.map(d => `
+        <span style="display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--bg2);border-radius:8px">
+          <span style="width:14px;height:14px;background:linear-gradient(180deg,${colors2[d.level]},${colors[d.level]});border-radius:3px"></span>
+          <strong>${d.level}</strong>
+          <span style="color:var(--tx3);font-size:11px">${d.count} trainees</span>
+        </span>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderLineChart(data){
+  const w=600,h=240,p=40,cw=w-p*2,ch=h-p*2;
+  const lines=[['cbd','CBD','#1565C0'],['dops','DOPS','#2E7D32'],['cex','Mini-CEX','#6A1B9A'],['iter','ITER','#F57C00']];
+  return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;max-height:280px">
+    <defs>
+      <filter id="lds"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.2"/></filter>
+    </defs>
+    ${[0,25,50,75,100].map(v=>`<line x1="${p}" y1="${p+ch-(v/100)*ch}" x2="${p+cw}" y2="${p+ch-(v/100)*ch}" stroke="#E3E8F0" stroke-dasharray="3,3"/><text x="${p-6}" y="${p+ch-(v/100)*ch+3}" text-anchor="end" font-size="10" fill="#94A3B8" font-family="Lexend">${v}</text>`).join('')}
+    ${data.map((d,i)=>`<text x="${p+(i/(data.length-1))*cw}" y="${h-8}" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">${d.month}</text>`).join('')}
+    ${lines.map(([k,n,c])=>{
+      const pts=data.map((d,i)=>`${p+(i/(data.length-1))*cw},${p+ch-(d[k]/100)*ch}`).join(' ');
+      return `<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="2.5" filter="url(#lds)"/>${data.map((d,i)=>`<circle cx="${p+(i/(data.length-1))*cw}" cy="${p+ch-(d[k]/100)*ch}" r="4.5" fill="#fff" stroke="${c}" stroke-width="2.5"/>`).join('')}`;
+    }).join('')}
+  </svg>
+  <div style="display:flex;justify-content:center;gap:18px;margin-top:14px;font-size:12px;flex-wrap:wrap">
+    ${lines.map(([k,n,c])=>`<span style="display:flex;align-items:center;gap:6px;padding:5px 12px;background:var(--bg2);border-radius:6px"><span style="width:14px;height:3px;background:${c};border-radius:2px"></span><strong>${n}</strong></span>`).join('')}
+  </div>`;
+}
+
+function attachEvents(){
+  const ts=document.getElementById('ts');
+  if(ts){
+    ts.addEventListener('input',e=>{
+      S.search=e.target.value;
+      document.getElementById('mc').innerHTML=pageContent();
+      attachEvents();
+      const newTs=document.getElementById('ts');
+      if(newTs){newTs.focus();newTs.setSelectionRange(S.search.length,S.search.length)}
+    });
+  }
+  const tlv=document.getElementById('tlv');
+  if(tlv)tlv.addEventListener('change',e=>{S.lvF=e.target.value;renderApp()});
+  const tgp=document.getElementById('tgp');
+  if(tgp)tgp.addEventListener('change',e=>{S.gpF=e.target.value;renderApp()});
+  const ttr=document.getElementById('ttr');
+  if(ttr)ttr.addEventListener('change',e=>{S.trF=e.target.value;renderApp()});
+  const pr=document.getElementById('pr');
+  if(pr)pr.addEventListener('change',e=>{S.pRes=e.target.value;renderApp()});
+  const examSearch=document.getElementById('exam-search');
+  if(examSearch){
+    examSearch.addEventListener('input',e=>{
+      S.examSearch=e.target.value;
+      document.getElementById('mc').innerHTML=pageContent();
+      attachEvents();
+      const newSearch=document.getElementById('exam-search');
+      if(newSearch){newSearch.focus();newSearch.setSelectionRange(S.examSearch.length,S.examSearch.length)}
+    });
+  }
+  const examLevel=document.getElementById('exam-level');
+  if(examLevel)examLevel.addEventListener('change',e=>{S.examLvF=e.target.value;renderApp()});
+}
+
+// ═══════════════════════════════════════════════════
+// LOAD ALL DATA FROM GOOGLE SHEETS
+// ═══════════════════════════════════════════════════
+async function loadAllData(){
+  S.loading = true;
+  renderApp();
+  
+  try {
+    // Fetch all sheets in parallel
+    const [
+      trainersRows, residentsRows,
+      r1Rows, r2Rows, r3Rows,
+      cbdRows, dopsRows, mcexRows, iterRows,
+      examsRows, leavesRows
+    ] = await Promise.all([
+      fetchSheet(SHEETS.trainers.gid),
+      fetchSheet(SHEETS.residents.gid),
+      fetchSheet(SHEETS.r1key.gid),
+      fetchSheet(SHEETS.r2key.gid),
+      fetchSheet(SHEETS.r3key.gid),
+      fetchSheet(SHEETS.cbd.gid),
+      fetchSheet(SHEETS.dops.gid),
+      fetchSheet(SHEETS.minicex.gid),
+      fetchSheet(SHEETS.iter.gid),
+      fetchSheet(SHEETS.exams.gid),
+      fetchSheet(SHEETS.leaves.gid),
+    ]);
+    
+    // ─── 1. TRAINERS (headers in row 2) ───
+    const trainerObjs = rowsToObjects(trainersRows, SHEETS.trainers.headerRow);
+    if(trainerObjs.length > 0){
+      const newTrainers = trainerObjs.map(t => ({
+        s: parseInt(t['Serial']) || 0,
+        n: t['الاسم'] || t['Name'] || '',
+        m: t['الجوال / Mobile'] || t['Mobile'] || t['الجوال'] || '',
+        r: t['الدور / اللجنة'] || t['Role'] || t['الدور'] || 'Trainer',
+        c: t['المركز التدريبي / Training Center'] || t['Center'] || ''
+      })).filter(t => t.n);
+      if(newTrainers.length > 0) TRAINERS = newTrainers;
+    }
+    
+    // ─── 2. RESIDENTS (headers in row 1) ───
+    const resObjs = rowsToObjects(residentsRows, SHEETS.residents.headerRow);
+    if(resObjs.length > 0){
+      const newRes = resObjs.map((r, i) => ({
+        id: parseInt(r['#']) || (i+1),
+        name: r['الاسم الكامل'] || r['Name'] || '',
+        level: (r['المرحلة'] || r['Level'] || 'R1').trim(),
+        group: (r['المجموعة'] || r['Group'] || 'G1').trim(),
+        serial: parseInt(r['الترتيب في المجموعة'] || r['Serial']) || 1,
+        status: r['الحالة'] || r['Status'] || 'Active'
+      })).filter(r => r.name);
+      if(newRes.length > 0) RES = newRes;
+    }
+    
+    // ─── 3. ROTATIONS (R1, R2, R3 — headers in row 3) ───
+    // Each Master Key has: Month | Date | Week# | GROUP 1 | ... | GROUP 6
+    // Only first row of each month has the rotation values; we extract those
+    function parseRotations(rows, headerRow, level){
+      if(rows.length <= headerRow) return;
+      const headers = rows[headerRow - 1].map(h => (h||'').trim());
+      const groupCols = {};
+      headers.forEach((h, i) => {
+        const m = h.match(/GROUP\s*(\d+)/i);
+        if(m) groupCols['G' + m[1]] = i;
+      });
+      
+      // Find month rows (where Month column has value like OCTOBER, NOVEMBER, etc.)
+      const months = ['OCTOBER','NOVEMBER','DECEMBER','JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER'];
+      const monthIndexMap = {};
+      months.forEach((m,i) => monthIndexMap[m] = i);
+      
+      if(!ROT[level]) ROT[level] = {};
+      Object.keys(groupCols).forEach(g => {
+        if(!ROT[level][g]) ROT[level][g] = new Array(12).fill('-');
+      });
+      
+      for(let r = headerRow; r < rows.length; r++){
+        const row = rows[r];
+        const monthVal = (row[0] || '').trim().toUpperCase();
+        if(monthIndexMap.hasOwnProperty(monthVal)){
+          const mIdx = monthIndexMap[monthVal];
+          Object.entries(groupCols).forEach(([g, colIdx]) => {
+            const val = (row[colIdx] || '').trim();
+            if(val) ROT[level][g][mIdx] = val;
+          });
+        }
+      }
+    }
+    parseRotations(r1Rows, SHEETS.r1key.headerRow, 'R1');
+    parseRotations(r2Rows, SHEETS.r2key.headerRow, 'R2');
+    parseRotations(r3Rows, SHEETS.r3key.headerRow, 'R3');
+    
+    // ─── 4. EVALUATIONS (CBD, DOPS, Mini-CEX, ITER — headers in row 4) ───
+    CBD_DATA = rowsToObjects(cbdRows, SHEETS.cbd.headerRow);
+    DOPS_DATA = rowsToObjects(dopsRows, SHEETS.dops.headerRow);
+    MINICEX_DATA = rowsToObjects(mcexRows, SHEETS.minicex.headerRow);
+    ITER_DATA = rowsToObjects(iterRows, SHEETS.iter.headerRow);
+    
+    // ─── 5. EXAMS (headers in row 4) ───
+    EXAMS_DATA = rowsToObjects(examsRows, SHEETS.exams.headerRow);
+    
+    // ─── 6. LEAVES (headers in row 4) ───
+    LEAVES_DATA = rowsToObjects(leavesRows, SHEETS.leaves.headerRow);
+    
+    S.lastUpdate = new Date();
+    S.error = null;
+    console.log('✅ Data loaded:', {
+      trainers: TRAINERS.length,
+      residents: RES.length,
+      cbd: CBD_DATA.length,
+      dops: DOPS_DATA.length,
+      minicex: MINICEX_DATA.length,
+      iter: ITER_DATA.length,
+      exams: EXAMS_DATA.length,
+      leaves: LEAVES_DATA.length
+    });
+  } catch(err) {
+    console.error('❌ Load failed:', err);
+    S.error = err.message;
+  }
+  
+  S.loading = false;
+  renderApp();
+}
+
+function formatTimeAgo(date){
+  const seconds = Math.floor((Date.now() - date) / 1000);
+  if(seconds < 60) return 'just now';
+  const minutes = Math.floor(seconds / 60);
+  if(minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if(hours < 24) return `${hours}h ago`;
+  return `${Math.floor(hours/24)}d ago`;
+}
+
+// ═══════════════════════════════════════════════════
+// INITIALIZATION
+// ═══════════════════════════════════════════════════
+loadAllData();
+
+// Auto-refresh every 5 minutes
+setInterval(loadAllData, 5 * 60 * 1000);
+
+// Refresh "time ago" every minute
+setInterval(() => {
+  if(S.lastUpdate && !S.loading) renderApp();
+}, 60 * 1000);
+</script>
+</body>
+</html>
