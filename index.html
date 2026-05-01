@@ -1855,16 +1855,18 @@ function mockPerf(id){
     function getEvalScore(data, monthName, name){
       const matches = data.filter(e => {
         const eName = (e['اسم الطبيب'] || e['Name'] || '').trim().toUpperCase();
-        const eRot = (e['التناوب'] || e['Rotation'] || e['ملاحظات'] || '').trim().toUpperCase();
-        const eMatch = eName === name;
-        const monthMatch = eRot.includes(monthName);
-        return eMatch && monthMatch;
+        // Look for month in BOTH "التناوب" AND "ملاحظات" (notes column)
+        const eRot = (e['التناوب'] || e['Rotation'] || '').trim().toUpperCase();
+        const eNotes = (e['ملاحظات'] || e['Notes'] || '').trim().toUpperCase();
+        const monthInRot = eRot.includes(monthName);
+        const monthInNotes = eNotes.includes(monthName);
+        return eName === name && (monthInRot || monthInNotes);
       });
       if(matches.length === 0) return null;
       // Average scores from matching evaluations
       const scores = matches.map(e => {
-        const s = parseFloat(e['الدرجة'] || e['Score'] || e['النتيجة'] || '0');
-        return isNaN(s) ? null : s;
+        const s = parseFloat(e['الدرجة'] || e['Score'] || '0');
+        return isNaN(s) || s === 0 ? null : s;
       }).filter(s => s !== null);
       if(scores.length === 0) return null;
       return Math.round(scores.reduce((a,b)=>a+b,0) / scores.length);
